@@ -10,10 +10,12 @@ while (<IN>) {
 		$year = $1;
 		$sum = 0;
 		open(OUT, ">out/$year");
-		print OUT "1 1\n";
+		# print OUT "1 1\n";
 	} elsif (/^([0-9]+)\s+([0-9]+)/) {
 		$sum += $2;
-		print OUT "$1 $sum ($2)\n";
+		if ($1 != 1) {
+			print OUT "$1 $sum ($2)\n";
+		}
 	} elsif (/^(max)\s+([0-9]+)/) {
 		$sum += $2;
 		print OUT "$1 $sum ($2)\n";
