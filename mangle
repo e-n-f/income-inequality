@@ -1,0 +1,21 @@
+#!/usr/bin/perl
+
+open(IN, "historical");
+while (<IN>) {
+	next if /^$/;
+	next if /http/;
+
+	if (/^([0-9]+):/) {
+		$year = $1;
+		$sum = 0;
+		open(OUT, ">out/$year");
+	} elsif (/^([0-9]+) ([0-9]+)/) {
+		$sum += $2;
+		print OUT "$1 $sum ($2)\n";
+	} elsif (/^(max) ([0-9]+)/) {
+		$sum += $2;
+		print OUT "$1 $sum ($2)\n";
+	} else {
+		die "??? $_";
+	}
+}
